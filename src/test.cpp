@@ -1,9 +1,13 @@
 #include <iostream>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "shader.h"
 #include "texture.h"
-
 
 void processInput(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -102,9 +106,10 @@ int main()
   //      "layout (location = 1) in vec3 aColor; \n"
         "layout (location = 2) in vec2 aTexCoord; \n"
         "out vec2 TexCoord;\n"
+        "uniform mat4 transform;\n"
         "void main() \n"
         "{\n"
-        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0f); \n"
+        "   gl_Position = transform * vec4(aPos.x, aPos.y, aPos.z, 1.0f); \n"
  //       "   outColor = aColor; \n"
         "   TexCoord = aTexCoord; \n"
         "}\0";
@@ -129,6 +134,7 @@ int main()
     std::string face_pth = "/home/wy-zyw/work/opengl/opengl/resource/awesomeface.png";
     Texture texture2(face_pth, GL_RGBA);
 
+
     Shader shader(vertex_shader_src, fragment_shader_src, false);
     shader.use();
     shader.setInt("texture1", 0);
@@ -147,15 +153,26 @@ int main()
 
         shader.use(); 
         shader.setFloat("alpha", alpha);
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        shader.setMat4("transform", trans);
+
         glBindVertexArray(VAO);
         //glDrawArrays(GL_TRIANGLES, 0, 3);        
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        glm::mat4 trans1 = glm::mat4(1.0f);
+        trans1 = glm::translate(trans1, glm::vec3(-0.5f, 0.5f, 0.0f));
+        float scalor = sin((float)glfwGetTime());
+        trans1 = glm::scale(trans1, glm::vec3(scalor, scalor, scalor));
+        shader.setMat4("transform", trans1);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
         glActiveTexture(GL_TEXTURE0);
 
         glfwSwapBuffers(cur_window.window);
         glfwPollEvents();
-
     }
 
 
