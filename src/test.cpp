@@ -15,18 +15,20 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 float alpha = 0.2;
 int main()
 {
+    int screen_width = 800;
+    int screen_height = 600;
     class Window{
     public:
         GLFWwindow* window;
         int is_success;
-        Window(){
+        Window(int screen_width, int screen_height){
             glfwInit();
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
             window =
-                glfwCreateWindow(800, 600, "learn opengl", nullptr, nullptr);
+                glfwCreateWindow(screen_width, screen_height, "learn opengl", nullptr, nullptr);
             is_success = true;
             if (nullptr == window) {
                 is_success = false;
@@ -43,7 +45,7 @@ int main()
 
     };
 
-    Window cur_window;
+    Window cur_window(800, 600);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -54,11 +56,55 @@ int main()
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(cur_window.window, framebuffer_size_callback);
 
+//    float vertices[] = {
+//         0.5f,  0.5f, 0.0f, /*vertex point*/ 1.0f, 0.0f, 0.0f, /*color*/ 1.0f, 1.0f, /*texCoord*/
+//         0.5f, -0.5f, 0.0f, /*vertex point*/ 0.0f, 1.0f, 0.0f, /*color*/ 1.0f, 0.0f, /*texCoord*/
+//        -0.5f, -0.5f, 0.0f, /*vertex point*/ 0.0f, 0.0f, 1.0f, /*color*/ 0.0f, 0.0f, /*texCoord*/
+//        -0.5f,  0.5f, 0.0f, /*vertex point*/ 1.0f, 1.0f, 0.0f, /*color*/ 0.0f, 1.0f /*texCoord*/
+    //};
+    
     float vertices[] = {
-         0.5f,  0.5f, 0.0f, /*vertex point*/ 1.0f, 0.0f, 0.0f, /*color*/ 1.0f, 1.0f, /*texCoord*/
-         0.5f, -0.5f, 0.0f, /*vertex point*/ 0.0f, 1.0f, 0.0f, /*color*/ 1.0f, 0.0f, /*texCoord*/
-        -0.5f, -0.5f, 0.0f, /*vertex point*/ 0.0f, 0.0f, 1.0f, /*color*/ 0.0f, 0.0f, /*texCoord*/
-        -0.5f,  0.5f, 0.0f, /*vertex point*/ 1.0f, 1.0f, 0.0f, /*color*/ 0.0f, 1.0f /*texCoord*/
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
     unsigned int indices[] = {
@@ -85,12 +131,10 @@ int main()
                     GL_STATIC_DRAW);
 
         //描述的是当前绑定的GL_ARRAY_BUFFER的VBO
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
-   //     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(3*sizeof(float)));
-     //   glEnableVertexAttribArray(1);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(6*sizeof(float)));
-        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)(3*sizeof(float)));
+        glEnableVertexAttribArray(1);
     }
     glBindVertexArray(0);
 
@@ -103,14 +147,14 @@ int main()
     const char* vertex_shader_src =
         "#version 330 core \n"
         "layout (location = 0) in vec3 aPos; \n"
-  //      "layout (location = 1) in vec3 aColor; \n"
-        "layout (location = 2) in vec2 aTexCoord; \n"
+        "layout (location = 1) in vec2 aTexCoord; \n"
         "out vec2 TexCoord;\n"
-        "uniform mat4 transform;\n"
+        "uniform mat4 model;\n"
+        "uniform mat4 view;\n"
+        "uniform mat4 proj;\n"
         "void main() \n"
         "{\n"
-        "   gl_Position = transform * vec4(aPos.x, aPos.y, aPos.z, 1.0f); \n"
- //       "   outColor = aColor; \n"
+        "   gl_Position = proj*view*model* vec4(aPos.x, aPos.y, aPos.z, 1.0f); \n"
         "   TexCoord = aTexCoord; \n"
         "}\0";
 
@@ -118,7 +162,6 @@ int main()
         "#version 330 core\n"
         "out vec4 FragColor;\n"
         "in vec2 TexCoord;\n"
-//        "in vec3 outColor;\n"
         "uniform sampler2D texture1;\n"
         "uniform sampler2D texture2;\n"
         "uniform float alpha;\n"
@@ -141,10 +184,23 @@ int main()
     shader.setInt("texture2", 1);
     shader.setFloat("alpha", alpha);
 
+//    glm::mat4 model = glm::mat4(1.0f);
+//    model = glm::rotate(model, (float)glfwGetTime()*glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+//    shader.setMat4("model", model);
+
+    glm::mat4 view = glm::mat4(1.0f);
+    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    shader.setMat4("view", view);
+
+    glm::mat4 proj = glm::mat4(1.0f);
+    proj = glm::perspective(glm::radians(45.0f), float(screen_width/screen_height), 0.1f, 100.0f);
+    shader.setMat4("proj", proj);
+
     while (!glfwWindowShouldClose(cur_window.window)) {
         processInput(cur_window.window);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glEnable(GL_DEPTH_TEST);
         
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1.ID);
@@ -153,21 +209,13 @@ int main()
 
         shader.use(); 
         shader.setFloat("alpha", alpha);
-        glm::mat4 trans = glm::mat4(1.0f);
-        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-        shader.setMat4("transform", trans);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::rotate(model, (float)glfwGetTime()*glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+        shader.setMat4("model", model);
 
         glBindVertexArray(VAO);
-        //glDrawArrays(GL_TRIANGLES, 0, 3);        
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-        glm::mat4 trans1 = glm::mat4(1.0f);
-        trans1 = glm::translate(trans1, glm::vec3(-0.5f, 0.5f, 0.0f));
-        float scalor = sin((float)glfwGetTime());
-        trans1 = glm::scale(trans1, glm::vec3(scalor, scalor, scalor));
-        shader.setMat4("transform", trans1);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawArrays(GL_TRIANGLES, 0, 36);        
+        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
         glActiveTexture(GL_TEXTURE0);
 
