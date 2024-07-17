@@ -25,6 +25,7 @@ int main()
             glfwInit();
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_SAMPLES, 4);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
             window =
@@ -64,58 +65,51 @@ int main()
     //};
     
     float vertices[] = {
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f, 
 
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
 
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-    };
-
-    unsigned int indices[] = {
-        0, 1, 2, 0, 2, 3
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
     };
 
     unsigned int VBO;
     glGenBuffers(1, &VBO);
-
-    unsigned int EBO;
-    glGenBuffers(1, &EBO);
 
     unsigned int VAO;
     glGenVertexArrays(1, &VAO); 
@@ -126,15 +120,11 @@ int main()
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices,
                     GL_STATIC_DRAW);
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
-                    GL_STATIC_DRAW);
-
         //描述的是当前绑定的GL_ARRAY_BUFFER的VBO
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)(3*sizeof(float)));
-        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(0);
     }
     glBindVertexArray(0);
 
@@ -147,77 +137,112 @@ int main()
     const char* vertex_shader_src =
         "#version 330 core \n"
         "layout (location = 0) in vec3 aPos; \n"
-        "layout (location = 1) in vec2 aTexCoord; \n"
-        "out vec2 TexCoord;\n"
+        "layout (location = 1) in vec3 aNormal; \n"
+        "out vec3 Normal; \n"
+        "out vec3 FragPos; \n"
+
         "uniform mat4 model;\n"
         "uniform mat4 view;\n"
         "uniform mat4 proj;\n"
         "void main() \n"
         "{\n"
-        "   gl_Position = proj*view*model* vec4(aPos.x, aPos.y, aPos.z, 1.0f); \n"
-        "   TexCoord = aTexCoord; \n"
+        "   gl_Position = proj*view*model* vec4(aPos, 1.0f); \n"
+        "   FragPos = vec3(model * vec4(aPos, 1.0f)); \n"
+        "   Normal = aNormal; \n"
         "}\0";
 
     const char* fragment_shader_src =
         "#version 330 core\n"
+        "in vec3 Normal;\n"
+        "in vec3 FragPos; \n"
+        "uniform vec3 lightPos; \n"
+        
         "out vec4 FragColor;\n"
-        "in vec2 TexCoord;\n"
-        "uniform sampler2D texture1;\n"
-        "uniform sampler2D texture2;\n"
-        "uniform float alpha;\n"
+        "uniform vec3 objColor;\n"
+        "uniform vec3 lightColor;\n"
+        "uniform vec3 ambientColor;\n"
         "void main()\n"
         "{\n"
-        "    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), alpha) ;\n"
+        "    vec3 norm = normalize(Normal); \n"
+        "    vec3 lightDir = normalize(lightPos - FragPos); \n"
+        "    float diff = max(dot(norm, lightDir), 0.0); \n"
+        "    vec3 diffuse = diff * lightColor; \n"
+        "    vec3 ambient = ambientColor * lightColor; \n"
+    //    "    FragColor = vec4(diffuse * objColor, 1.0f); \n"
+        "    FragColor = vec4((ambient + diffuse) * objColor, 1.0f); \n"
         "}\0";
 
+    const char* v_shader_src =
+        "#version 330 core \n"
+        "layout (location = 0) in vec3 aPos; \n"
+        "uniform mat4 model;\n"
+        "uniform mat4 view;\n"
+        "uniform mat4 proj;\n"
+        "void main() \n"
+        "{\n"
+        "   gl_Position = proj*view*model* vec4(aPos, 1.0f); \n"
+        "}\0";
 
-    std::string container_pth = "/home/wy-zyw/work/opengl/opengl/resource/container.jpg";
-    Texture texture1(container_pth);
+    const char* f_shader_src =
+        "#version 330 core\n"
+        "out vec4 FragColor;\n"
+        "uniform vec3 lightColor;\n"
+        "void main()\n"
+        "{\n"
+        "    FragColor = vec4(lightColor, 1.0f); \n"
+        "}\0";
 
-    std::string face_pth = "/home/wy-zyw/work/opengl/opengl/resource/awesomeface.png";
-    Texture texture2(face_pth, GL_RGBA);
+//    std::string container_pth = "/home/wy-zyw/work/opengl/opengl/resource/container.jpg";
+//    Texture texture1(container_pth);
 
 
     Shader shader(vertex_shader_src, fragment_shader_src, false);
     shader.use();
-    shader.setInt("texture1", 0);
-    shader.setInt("texture2", 1);
-    shader.setFloat("alpha", alpha);
 
-//    glm::mat4 model = glm::mat4(1.0f);
-//    model = glm::rotate(model, (float)glfwGetTime()*glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-//    shader.setMat4("model", model);
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::rotate(model, glm::radians(30.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+    shader.setMat4("model", model);
 
     glm::mat4 view = glm::mat4(1.0f);
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -7.0f));
+    view = glm::rotate(view, glm::radians(-30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     shader.setMat4("view", view);
 
     glm::mat4 proj = glm::mat4(1.0f);
     proj = glm::perspective(glm::radians(45.0f), float(screen_width/screen_height), 0.1f, 100.0f);
     shader.setMat4("proj", proj);
 
+    shader.setVec3("objColor", glm::vec3(1.0f, 0.5f, 0.31f));
+    shader.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+    shader.setVec3("ambientColor", glm::vec3(0.1f));
+    glm::vec3 light_pos(1.2f, 1.0f, 2.0f);
+    shader.setVec3("lightPos", light_pos);
+
+    Shader shader_light(v_shader_src, f_shader_src, false);
+    shader_light.use();
+    glm::mat4 model_light = glm::mat4(1.0f);
+    model_light = glm::translate(model_light, light_pos);
+    model_light = glm::scale(model_light, glm::vec3(0.2f));
+    shader_light.setMat4("model", model_light);
+    shader_light.setMat4("view", view);
+    shader_light.setMat4("proj", proj);
+    shader_light.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+
     while (!glfwWindowShouldClose(cur_window.window)) {
         processInput(cur_window.window);
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_DEPTH_TEST|GL_MULTISAMPLE);
         
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture1.ID);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2.ID);
-
         shader.use(); 
-        shader.setFloat("alpha", alpha);
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::rotate(model, (float)glfwGetTime()*glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-        shader.setMat4("model", model);
-
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);        
         //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        shader_light.use();
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);        
+
         glBindVertexArray(0);
-        glActiveTexture(GL_TEXTURE0);
 
         glfwSwapBuffers(cur_window.window);
         glfwPollEvents();
@@ -226,7 +251,6 @@ int main()
 
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
     glDeleteProgram(shader.ID);
 
     return 0;
